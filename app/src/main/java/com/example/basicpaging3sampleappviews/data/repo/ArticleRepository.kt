@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class ArticleRepository @Inject constructor(): Repository {
 
-    fun articlePagingSource() = ArticlePagingSource()
+    override fun articlePagingSource() = ArticlePagingSource()
 }
