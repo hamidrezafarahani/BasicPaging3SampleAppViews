@@ -3,6 +3,7 @@ package com.example.basicpaging3sampleappviews.domain
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.basicpaging3sampleappviews.data.Article
 import com.example.basicpaging3sampleappviews.data.repo.Repository
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +34,7 @@ class GetArticlesUseCase @Inject constructor(
     fun items(
         coroutineScope: CoroutineScope,
         op: (Throwable) -> Unit
-    ): SharedFlow<PagingData<Article>> = this().catch { op(it) }.shareIn(
+    ): SharedFlow<PagingData<Article>> = this().cachedIn(coroutineScope).catch { op(it) }.shareIn(
         scope = coroutineScope,
         started = SharingStarted.WhileSubscribed(),
         replay = 1
