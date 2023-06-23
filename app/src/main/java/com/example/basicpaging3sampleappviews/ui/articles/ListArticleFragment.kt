@@ -50,7 +50,13 @@ class ListArticleFragment : Fragment(R.layout.fragment_list_article) {
     private fun setupObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.items.collectLatest {
+                /*viewModel.items.collectLatest {
+                    adapter.submitData(it)
+                }*/
+
+                // OR USING THIS
+
+                viewModel.articles.collectLatest {
                     adapter.submitData(it)
                 }
             }
